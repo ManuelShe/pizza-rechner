@@ -103,7 +103,7 @@ td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .mb{min-height:30px;padding:0 10px;font-size:13px;border-radius:99px;background:var(--crust);color:#fff;border:0;margin-left:6px}
 .cnt output.mo{color:var(--crust)}
 .hrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
-#print{background:#fff;color:var(--redd);border:0;padding:0 18px}
+.hb{background:#fff;color:var(--redd);border:0;padding:0 18px}
 .pnote{background:rgba(255,255,255,.15);border-radius:8px;padding:8px 12px;font-size:15px}
 .ponly{display:none}
 @media(max-width:600px){.shop li{grid-template-columns:auto minmax(0,1fr)}.shop .q{grid-column:2;text-align:left;max-width:none}}
@@ -177,7 +177,7 @@ body{padding-bottom:84px}
 </head>
 <body>
 <header class="band top"><div class="wrap">
-<div class="hrow"><h1>Pizzaabend-Rechner</h1><button type="button" id="print">Drucken</button></div>
+<div class="hrow"><h1>Pizzaabend-Rechner</h1><span class="bt"><button type="button" id="toTime" class="hb">Zum Zeitplan</button><button type="button" id="print" class="hb">Drucken</button></span></div>
 <p class="pnote" id="phint" hidden>In der Claude-Ansicht ist Drucken gesperrt. Öffne die HTML-Datei im Browser (später die GitHub-Version), dort klappt es.</p>
 <p>Teig mit 63 % Wasser, Salz nach Wahl und wenig Hefe, 20 Stunden kalt gereift und im Gas-Pizzaofen gebacken. Gib die Personenzahl ein, dann rechnet die Seite Teig, Beläge, Einkauf und Zeitplan aus.</p>
 </div></header>
@@ -214,8 +214,11 @@ body{padding-bottom:84px}
 <div class="seg" id="kn"><button type="button" data-v="machine">mit Maschine</button><button type="button" data-v="hand">von Hand</button></div>
 <div id="capW" style="margin-top:10px"><label class="l" for="cap">Max. Mehl pro Durchgang (g)</label>
 <input id="cap" type="number" min="200" max="5000" step="100" value="1000" inputmode="numeric">
-<p class="hint">Haushalts-Küchenmaschinen schaffen meist 1–1,5 kg Mehl bei diesem Teig.</p></div>
-<p class="hint" id="knHint" hidden>Von Hand wird in Portionen à max. 1 kg Mehl geknetet, ca. 25 min pro Portion. Mit mehreren Helfern geht das parallel.</p></div>
+<p class="hint">Haushalts-Küchenmaschinen schaffen meist 1–1,5 kg Mehl bei diesem Teig.</p>
+<p class="hint" id="knMach"></p></div>
+<div id="knHand" hidden style="margin-top:10px"><label class="l" for="hm">Deine Knetzeit pro Portion (min)</label>
+<div class="step"><button type="button" data-hm="-5" aria-label="weniger">−</button><input id="hm" type="number" min="10" max="60" step="5" value="25" inputmode="numeric"><button type="button" data-hm="5" aria-label="mehr">+</button></div>
+<p class="hint" id="knHint"></p></div></div>
 <div><label class="l" for="ts">Erste Pizza aus dem Ofen</label>
 <input id="ts" type="datetime-local"></div>
 </div>
@@ -349,8 +352,8 @@ const V0=[
 ];
 const RES={oil:10,knob:1,ros:.5,flock:1};
 let V=[];
-let S={ad:12,ki:0,hu:270,ov:16,bw:'auto',cap:1000,ts:'',on:{},fix:{},ext:{},ch:'fdl',sa:30,bx:3,pb:6,own:[],cp:[],ye:'dry',chk:{},kn:'machine'};
-const VERSION='1.0';const DEF=JSON.stringify(S);let CAN=true;
+let S={ad:12,ki:0,hu:270,ov:16,bw:'auto',cap:1000,ts:'',on:{},fix:{},ext:{},ch:'fdl',sa:30,bx:3,pb:6,own:[],cp:[],ye:'dry',chk:{},kn:'machine',hm:25};
+const VERSION='1.2';const DEF=JSON.stringify(S);let CAN=true;
 try{const s=JSON.parse(localStorage.getItem('pizzaRechner')||'null');if(s)S=Object.assign(S,s);const c=JSON.parse(localStorage.getItem('pizzaChk')||'null');if(c)S.chk=c}catch(e){CAN=false}
 S.fix=S.fix||{};S.own=S.own||[];S.chk=S.chk||{};S.cp=S.cp||[];S.ext=S.ext||{};delete S.dl;delete S._txt;let TXT='';
 function syncV(){
@@ -416,7 +419,9 @@ function render(){
  for(const b of $('hu').children)b.setAttribute('aria-pressed',+b.dataset.v===S.hu);
  for(const b of $('ov').children)b.setAttribute('aria-pressed',+b.dataset.v===S.ov);
  for(const b of $('kn').children)b.setAttribute('aria-pressed',b.dataset.v===S.kn);
- $('capW').hidden=S.kn==='hand';$('knHint').hidden=S.kn!=='hand';
+ $('capW').hidden=S.kn==='hand';$('knHand').hidden=S.kn!=='hand';$('hm').value=S.hm;
+ $('knMach').textContent='Erwartete Knetzeit: ca. '+hf(knMin(r.nb))+(r.nb>1?' für '+r.nb+' Durchgänge (je ca. 15–20 min, nacheinander)':' (ca. 20 min inkl. Zutaten abwiegen)')+'.';
+ $('knHint').textContent='Geknetet wird in Portionen à max. 1 kg Mehl: '+r.nb+' Portion'+(r.nb>1?'en':'')+' × '+S.hm+' min = '+hf(knMin(r.nb))+'. Knetet ihr mit Helfern parallel, stell die Zeit pro Portion einfach kürzer ein.';
  for(const b of $('ye').children)b.setAttribute('aria-pressed',b.dataset.v===S.ye);
  for(const b of $('sa').children)b.setAttribute('aria-pressed',+b.dataset.v===S.sa);
  $('saHint').textContent=S.sa===30?'Wie im Grundrezept, typisch für neapolitanischen Teig.':'Milder im Geschmack. Der Teig wird etwas weicher und bräunt minimal schneller; Salami, Schinken und Käse bringen ja schon Salz mit.';
@@ -499,7 +504,8 @@ function render(){
 const XSTEP={shop:60,knead:5,portion:5,fridge:30,acc:15,mozz:30,prep:5,oven:5};
 const XMAX={shop:4320,knead:120,portion:60,fridge:2880,acc:180,mozz:720,prep:240,oven:60};
 let PLAN={fridge:1200,acc:180};
-function planD(r){const knead=S.kn==='hand'?25*r.nb:20+(r.nb-1)*15,portion=Math.round(10+r.balls*.5);
+function knMin(nb){return S.kn==='hand'?S.hm*nb:20+(nb-1)*15}
+function planD(r){const knead=S.kn==='hand'?S.hm*r.nb:20+(r.nb-1)*15,portion=Math.round(10+r.balls*.5);
  const MIN={shop:1440,knead:knead,portion:15+portion,fridge:1200,acc:180,mozz:300,prep:90,oven:25};
  const D={};for(const k in MIN)D[k]=MIN[k]+Math.min(S.ext[k]||0,XMAX[k]);return D}
 function nextSat(){
@@ -591,6 +597,8 @@ document.addEventListener('click',e=>{
   if(!t.classList.contains('arm')){t.classList.add('arm');t.textContent='Wirklich neu?';clearTimeout(t._tm);t._tm=setTimeout(()=>{t.classList.remove('arm');t.textContent='Neu'},4000);return}
   clearTimeout(t._tm);t.classList.remove('arm');t.textContent='Neu';
   S=JSON.parse(DEF);S.chk={};saveChk();OPEN.clear();syncV();nextSat();resetCp();render();window.scrollTo({top:0,behavior:'smooth'})}
+ else if(t.dataset.hm){S.hm=Math.max(10,Math.min(60,S.hm+ +t.dataset.hm));render()}
+ else if(t.id==='toTime'){const el=document.querySelector('#time dt.next')||$('zeitplan');el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:el.id==='zeitplan'?'start':'center'})}
  else if(t.id==='fExp'){$('fm').open=false;
   const o=Object.assign({},S);delete o.chk;
   const data=JSON.stringify({app:'pizzaabend-rechner',version:VERSION,saved:new Date().toISOString(),settings:o},null,1);
@@ -618,6 +626,7 @@ document.addEventListener('change',e=>{
  if(t.dataset.on){const r=calc();for(const v of V)S.on[v.id]=active(v,r.pers);S.on[t.dataset.on]=t.checked;if(!t.checked)delete S.fix[t.dataset.on];render();return}
  if(t.id==='ad'||t.id==='ki'){S[t.id]=Math.max(t.id==='ad'?1:0,Math.min(200,parseInt(t.value)||0));render()}
  else if(t.id==='bw'){S.bw=t.value==='auto'?'auto':+t.value;render()}
+ else if(t.id==='hm'){S.hm=Math.max(10,Math.min(60,Math.round((parseInt(t.value)||25)/5)*5));render()}
  else if(t.id==='pb'){S.pb=Math.max(1,Math.min(20,parseInt(t.value)||6));render()}
  else if(t.id==='bx'){S.bx=Math.max(0,Math.min(50,parseInt(t.value)||0));render()}
  else if(t.id==='cap'){S.cap=Math.max(200,parseInt(t.value)||1000);render()}

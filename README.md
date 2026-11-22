@@ -1,7 +1,10 @@
 # 🍕 Pizzaabend-Rechner
 
+**Version 1.2**
+
 Eine kleine Web-App für den Pizzaabend mit vielen Gästen: Personenzahl eingeben, und die App berechnet Teig, Beläge, Einkaufsliste und einen Zeitplan bis zur ersten Pizza aus dem Gas-Pizzaofen.
 
+**Zur App:** https://DEINNAME.github.io/pizza-rechner/
 <!-- DEINNAME durch den eigenen GitHub-Namen ersetzen -->
 
 ---
@@ -12,7 +15,7 @@ Eine kleine Web-App für den Pizzaabend mit vielen Gästen: Personenzahl eingebe
   - **Teiglinggewicht:** Wird automatisch passend zu Gästezahl und Ofengröße (12 oder 16 Zoll) gewählt oder lässt sich frei einstellen.
   - **Salz:** üblich (30 g pro kg Mehl) oder weniger (20 g pro kg).
   - **Hefe:** Trockenhefe oder Frischhefe.
-  - **Kneten:** mit Maschine, aufgeteilt in mehrere Durchgänge, oder von Hand.
+  - **Kneten:** mit Maschine, aufgeteilt in mehrere Durchgänge, mit Anzeige der erwarteten Knetzeit, oder von Hand mit eigener Knetzeit pro Portion.
 - **Teigboxen:** Zeigt, wie die Teiglinge gleichmäßig auf die vorhandenen Boxen verteilt werden, und meldet fehlende Boxen.
 - **Pizzasorten:**
   - Die Sorten werden je nach Personenzahl automatisch ausgewählt, von Margherita bis Hawaii, mit Dessertpizza zum Schluss.
@@ -32,26 +35,27 @@ Eine kleine Web-App für den Pizzaabend mit vielen Gästen: Personenzahl eingebe
 - **Rezept und Mise en place** als Checklisten zum Abhaken.
 - **Druckansicht** auf 4 Seiten: Überblick mit Zeitplan, Einkaufsliste, Teigrezept, Pizzen mit Mise en place.
 - **Speichern:** Einstellungen bleiben auf dem Gerät gespeichert. Mit „Neu“ gelten wieder die Standardwerte.
+- **Als Datei speichern / Datei öffnen** (Menü „Datei“): Einstellungen als `.json`-Datei sichern, auf ein anderes Gerät übertragen oder an andere weitergeben.
 - **Offline nutzbar** und als App installierbar.
 
 ## Als App installieren
 
-| Gerät                  | So geht's                                                                            |
-| ---------------------- | ------------------------------------------------------------------------------------ |
-| Android (Chrome)       | Seite öffnen → Menü ⋮ → **App installieren** bzw. **Zum Startbildschirm hinzufügen** |
-| iPhone / iPad (Safari) | Seite öffnen → Teilen → **Zum Home-Bildschirm**                                      |
-| PC (Chrome / Edge)     | Installations-Symbol rechts in der Adressleiste                                      |
+| Gerät | So geht's |
+|---|---|
+| Android (Chrome) | Seite öffnen → Menü ⋮ → **App installieren** bzw. **Zum Startbildschirm hinzufügen** |
+| iPhone / iPad (Safari) | Seite öffnen → Teilen → **Zum Home-Bildschirm** |
+| PC (Chrome / Edge) | Installations-Symbol rechts in der Adressleiste |
 
 Nach dem ersten Öffnen mit Internet funktioniert die App auch ohne Netz.
 
 ## Dateien
 
-| Datei                                          | Zweck                                                       |
-| ---------------------------------------------- | ----------------------------------------------------------- |
-| `index.html`                                   | Die komplette App (HTML, CSS und JavaScript in einer Datei) |
-| `manifest.webmanifest`                         | App-Name, Farben und Icons für die Installation             |
-| `sw.js`                                        | Service Worker: speichert die App für die Offline-Nutzung   |
-| `icon-192.png`, `icon-512.png`, `icon-180.png` | App-Icons (Android bzw. iOS)                                |
+| Datei | Zweck |
+|---|---|
+| `index.html` | Die komplette App (HTML, CSS und JavaScript in einer Datei) |
+| `manifest.webmanifest` | App-Name, Farben und Icons für die Installation |
+| `sw.js` | Service Worker: speichert die App für die Offline-Nutzung |
+| `icon-192.png`, `icon-512.png`, `icon-180.png` | App-Icons (Android bzw. iOS) |
 
 ## Veröffentlichen mit GitHub Pages
 
@@ -69,13 +73,21 @@ Die App hat kein Konto und keinen Server und erfasst keine Daten. Einstellungen 
 
 ## Grundrezept
 
-| Zutat                         | Menge pro 1 kg Mehl |
-| ----------------------------- | ------------------- |
-| Mehl Typ 00 (11–15 % Protein) | 1000 g              |
-| Wasser                        | 630 g               |
-| Salz                          | 30 g (oder 20 g)    |
-| Trockenhefe / Frischhefe      | 1 g / 3 g           |
+| Zutat | Menge pro 1 kg Mehl |
+|---|---|
+| Mehl Typ 00 (11–15 % Protein) | 1000 g |
+| Wasser | 630 g |
+| Salz | 30 g (oder 20 g) |
+| Trockenhefe / Frischhefe | 1 g / 3 g |
 
 Kneten → dehnen und falten → 15 min ruhen lassen → portionieren → 20 h im Kühlschrank → 3 h bei Raumtemperatur → bei 400–450 °C 60–90 s backen.
 
 Die Belagsmengen sind Richtwerte für eine Pizza aus einem 280-g-Teigling und werden an das gewählte Teiglinggewicht angepasst.
+
+## Versionen
+
+| Version | Änderungen |
+|---|---|
+| 1.2 | Kneten von Hand: eigene Knetzeit pro Portion einstellbar; bei Maschine Anzeige der erwarteten Knetzeit |
+| 1.1 | Button „Zum Zeitplan“ oben: springt direkt zum aktuellen Schritt |
+| 1.0 | Erste Version |
