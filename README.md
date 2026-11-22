@@ -2,8 +2,6 @@
 
 Eine kleine Web-App für den Pizzaabend mit vielen Gästen: Personenzahl eingeben, und die App berechnet Teig, Beläge, Einkaufsliste und einen Zeitplan bis zur ersten Pizza aus dem Gas-Pizzaofen.
 
-**Zur App:** https://DEINNAME.github.io/pizza-rechner/
-
 <!-- DEINNAME durch den eigenen GitHub-Namen ersetzen -->
 
 ---
