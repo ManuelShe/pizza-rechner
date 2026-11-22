@@ -1,6 +1,6 @@
 # 🍕 Pizzaabend-Rechner
 
-**Version 1.2**
+**Version 1.3**
 
 Eine kleine Web-App für den Pizzaabend mit vielen Gästen: Personenzahl eingeben, und die App berechnet Teig, Beläge, Einkaufsliste und einen Zeitplan bis zur ersten Pizza aus dem Gas-Pizzaofen.
 
@@ -88,6 +88,7 @@ Die Belagsmengen sind Richtwerte für eine Pizza aus einem 280-g-Teigling und we
 
 | Version | Änderungen |
 |---|---|
+| 1.3 | Nach einem Sprung aus dem Zeitplan bleibt oben ein Button „Zurück zum Zeitplan“ stehen |
 | 1.2 | Kneten von Hand: eigene Knetzeit pro Portion einstellbar; bei Maschine Anzeige der erwarteten Knetzeit |
 | 1.1 | Button „Zum Zeitplan“ oben: springt direkt zum aktuellen Schritt |
 | 1.0 | Erste Version |
