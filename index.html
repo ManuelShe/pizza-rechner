@@ -144,12 +144,16 @@ body{padding-bottom:84px}
 .fm summary{list-style:none;min-height:44px;display:flex;align-items:center;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:var(--soft);font-weight:600;cursor:pointer}
 .fm summary::-webkit-details-marker{display:none}
 .fm[open] summary{border-color:var(--red)}
-.fmm{position:absolute;bottom:calc(100% + 8px);left:0;display:grid;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;box-shadow:0 8px 24px rgba(0,0,0,.15);min-width:200px;z-index:30}
+.fmm{position:fixed;max-width:calc(100vw - 16px);display:grid;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;box-shadow:0 8px 24px rgba(0,0,0,.15);min-width:200px;z-index:30}
 .fmm button{text-align:left;padding:0 12px;white-space:nowrap}
 .vfoot{text-align:center;font-size:13px;color:var(--mute);padding:8px 16px 24px}
-html{scroll-padding-top:64px}
-.backt{position:fixed;top:calc(10px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:25;background:var(--red);color:#fff;border:0;border-radius:99px;padding:0 20px;box-shadow:0 6px 18px rgba(0,0,0,.25);white-space:nowrap}
-.backt[hidden]{display:none}
+html{scroll-padding-top:68px}
+.nav{position:sticky;top:0;z-index:22;background:var(--card);border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.navi{max-width:1240px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:0 max(5vw,16px) 0 calc(max(5vw,16px) - 10px)}
+.navi::-webkit-scrollbar{display:none}
+.navi a{flex:none;display:flex;align-items:center;min-height:48px;padding:0 10px;color:var(--mute);font-weight:600;text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap}
+.navi a:hover{color:var(--ink)}
+.navi a.on{color:var(--red);border-bottom-color:var(--red)}
 .mod{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40;display:grid;place-items:center;padding:16px}
 .mod[hidden]{display:none}
 .modc{background:var(--card);border-radius:16px;padding:20px;max-width:420px;width:100%;max-height:92vh;overflow:auto;display:grid;gap:12px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
@@ -195,9 +199,10 @@ html{scroll-padding-top:64px}
 <p class="pnote" id="phint" hidden>In der Claude-Ansicht ist Drucken gesperrt. Öffne die HTML-Datei im Browser (später die GitHub-Version), dort klappt es.</p>
 <p>Teig mit 63 % Wasser, Salz nach Wahl und wenig Hefe, 20 Stunden kalt gereift und im Gas-Pizzaofen gebacken. Gib die Personenzahl ein, dann rechnet die Seite Teig, Beläge, Einkauf und Zeitplan aus.</p>
 </div></header>
+<nav class="nav" id="nav" aria-label="Bereiche"><div class="navi"><a href="#einstellungen" data-nav="einstellungen">Einstellungen</a><a href="#belaege" data-nav="belaege">Pizzen</a><a href="#zeitplan" data-nav="zeitplan">Zeitplan</a><a href="#einkauf" data-nav="einkauf">Einkauf</a><a href="#rezept" data-nav="rezept">Rezept</a><a href="#mise-en-place" data-nav="mise-en-place">Mise en place</a><a href="#hinweise" data-nav="hinweise">Hinweise</a></div></nav>
 
 <main class="band"><div class="wrap">
-<section class="grid">
+<section class="grid" id="einstellungen">
 <div class="card ctl">
 <div><label class="l" for="ad">Erwachsene</label>
 <div class="step"><button type="button" data-s="ad" data-d="-1" aria-label="weniger">−</button><input id="ad" type="number" min="1" max="200" value="12" inputmode="numeric"><button type="button" data-s="ad" data-d="1" aria-label="mehr">+</button></div></div>
@@ -265,11 +270,11 @@ html{scroll-padding-top:64px}
 </section>
 
 <section style="margin-top:40px">
-<h2 id="einkauf">Einkaufsliste</h2><div class="card shop"><div id="shop"></div>
-<div class="row"><span class="hint" id="copied"></span><span class="bt"><button type="button" data-clr="s">Häkchen entfernen</button><button type="button" id="copy">Liste kopieren</button></span></div></div>
+<div><h2 id="zeitplan">Zeitplan</h2><div class="card"><dl class="time" id="time"></dl><div class="row"><span class="hint">Erledigte Schritte abhaken – hervorgehoben ist immer der erste offene Schritt. Mit −/+ gibst du einem Schritt mehr Zeit; kürzer als die Mindestzeit geht nicht.</span><span class="bt"><button type="button" data-clr="t">Häkchen entfernen</button><button type="button" id="treset">Zeitplan zurücksetzen</button></span></div></div></div>
 </section>
 <section style="margin-top:40px">
-<div><h2 id="zeitplan">Zeitplan</h2><div class="card"><dl class="time" id="time"></dl><div class="row"><span class="hint">Erledigte Schritte abhaken – hervorgehoben ist immer der erste offene Schritt. Mit −/+ gibst du einem Schritt mehr Zeit; kürzer als die Mindestzeit geht nicht.</span><span class="bt"><button type="button" data-clr="t">Häkchen entfernen</button><button type="button" id="treset">Zeitplan zurücksetzen</button></span></div></div></div>
+<h2 id="einkauf">Einkaufsliste</h2><div class="card shop"><div id="shop"></div>
+<div class="row"><span class="hint" id="copied"></span><span class="bt"><button type="button" data-clr="s">Häkchen entfernen</button><button type="button" id="copy">Liste kopieren</button></span></div></div>
 </section>
 
 <section style="margin-top:40px">
@@ -289,7 +294,7 @@ html{scroll-padding-top:64px}
 </section>
 
 <section style="margin-top:40px" class="tips noprint">
-<h2>Hinweise</h2>
+<h2 id="hinweise">Hinweise</h2>
 <div class="cols">
 <div class="card"><h3>Im Gas-Pizzaofen</h3><ul>
 <li>20–25 Minuten auf voller Flamme vorheizen, im Winter ein paar Minuten länger. Ziel: Stein 400–450 °C, am besten mit dem Infrarot-Thermometer messen.</li>
@@ -330,7 +335,6 @@ html{scroll-padding-top:64px}
 <div id="clL"></div>
 <div class="bt"><button type="button" id="clClose">Schließen</button></div>
 </div></div>
-<button type="button" id="backT" class="backt" hidden>↑ Zurück zum Zeitplan</button>
 <div class="sbar" role="region" aria-label="Einstellungen speichern"><div class="sbin"><span class="sbst" id="sbSt" aria-live="polite"></span><span class="bt"><button type="button" id="sbNew" class="it"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15h6"/></svg><span class="lb">Neu</span></button><details class="fm" id="fm"><summary class="it"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span>Datei</span></summary><div class="fmm"><button type="button" id="fExp" class="it"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span>Als Datei speichern</span></button><button type="button" id="fImpB" class="it"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg><span>Datei öffnen</span></button><input type="file" id="fImp" accept=".json,application/json" hidden></div></details></span></div></div>
 <div id="pv"></div>
 
@@ -385,8 +389,9 @@ const V0=[
 const RES={oil:10,knob:1,ros:.5,flock:1};
 let V=[];
 let S={ad:12,ki:0,hu:270,ov:16,bw:'auto',cap:1000,ts:'',on:{},fix:{},ext:{},ch:'fdl',sa:30,bx:3,pb:6,own:[],cp:[],ye:'dry',chk:{},kn:'machine',hm:25};
-const VERSION='1.4';
+const VERSION='1.5';
 const CHANGES=[
+ ['1.5','26.11.2026',['Navigationsleiste oben, die beim Scrollen stehen bleibt und den aktuellen Bereich markiert','Neue Reihenfolge: Einstellungen, Pizzen, Zeitplan, Einkauf, Rezept, Mise en place, Hinweise','„Zurück zum Zeitplan“ entfällt – die Navigationsleiste übernimmt','Datei-Menü wird nicht mehr vom Bildschirmrand abgeschnitten']],
  ['1.4','25.11.2026',['Teilen per Link und QR-Code – auf Wunsch mit Häkchen','Ausdruck zeigt abgehakte Einträge als abgehakt; Häkchen werden in der Datei mitgespeichert','Automatisches Speichern nach jeder Eingabe (kein Speichern-Button mehr)','Symbole für Teilen, Drucken, Neu und Datei','Teigboxen: Reichen sie nicht, werden die vorhandenen zuerst voll belegt','Versionsnummer anklickbar: Übersicht der Änderungen']],
  ['1.3','22.11.2026',['Nach einem Sprung aus dem Zeitplan bleibt oben „Zurück zum Zeitplan“ stehen']],
  ['1.2','22.11.2026',['Kneten von Hand: eigene Knetzeit pro Portion einstellbar','Mit Maschine: Anzeige der erwarteten Knetzeit']],
@@ -696,6 +701,15 @@ document.addEventListener('submit',e=>{
   const id='cp'+Date.now();S.cp.push({id,n,veg:$('cpV').checked,i,nm});S.on[id]=true;syncV();resetCp();$('cpD').open=false;render()}
 });
 $('ver').textContent=VERSION;
+{const links=[...document.querySelectorAll('.navi a')],navi=document.querySelector('.navi');let cur='';
+ const spy=()=>{let id=links[0].dataset.nav;for(const a of links){const el=document.getElementById(a.dataset.nav);if(el&&el.getBoundingClientRect().top<=140)id=a.dataset.nav}
+  if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)id=links[links.length-1].dataset.nav;
+  if(id===cur)return;cur=id;for(const a of links){const on=a.dataset.nav===id;a.classList.toggle('on',on);if(on){a.setAttribute('aria-current','true');navi.scrollTo({left:a.offsetLeft-navi.clientWidth/2+a.offsetWidth/2,behavior:'smooth'})}else a.removeAttribute('aria-current')}};
+ addEventListener('scroll',spy,{passive:true});addEventListener('resize',spy);setTimeout(spy,50);}
+function placeFm(){const m=document.querySelector('.fmm'),r=$('fm').querySelector('summary').getBoundingClientRect();
+ m.style.left='auto';m.style.right=Math.max(8,document.documentElement.clientWidth-r.right)+'px';m.style.bottom=(innerHeight-r.top+8)+'px'}
+$('fm').addEventListener('toggle',()=>{if($('fm').open)placeFm()});
+addEventListener('resize',()=>{if($('fm').open)placeFm()});
 $('verB').addEventListener('click',()=>{$('clL').innerHTML=CHANGES.map(c=>'<div class="clv"><h3>Version '+c[0]+' <span class="hint">· '+c[1]+'</span></h3><ul>'+c[2].map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>').join('');$('clM').hidden=false;$('clClose').focus()});
 $('clClose').addEventListener('click',()=>{$('clM').hidden=true});
 $('clM').addEventListener('click',e=>{if(e.target.id==='clM')$('clM').hidden=true});
@@ -725,10 +739,6 @@ async function loadShared(){if(!location.hash.startsWith('#p='))return;
  catch(e){flash('Der geteilte Link ist unvollständig oder beschädigt.','warn')}
  try{history.replaceState(null,'',location.href.split('#')[0])}catch(e){}}
 addEventListener('hashchange',loadShared);
-let BACK=null,BACKT=0;
-document.addEventListener('click',e=>{const a=e.target.closest('#time a.jl');if(!a)return;const dt=a.closest('dd').previousElementSibling;BACK=dt&&dt.dataset.tk;BACKT=Date.now();$('backT').hidden=!BACK});
-$('backT').addEventListener('click',()=>{const el=BACK&&document.querySelector('#time dt[data-tk="'+BACK+'"]');(el||$('zeitplan')).scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:el?'center':'start'});$('backT').hidden=true;BACK=null});
-addEventListener('scroll',()=>{if(!BACK||Date.now()-BACKT<800)return;const el=document.querySelector('#time dt[data-tk="'+BACK+'"]');if(!el)return;const r=el.getBoundingClientRect();if(r.top>innerHeight*.15&&r.bottom<innerHeight*.85){$('backT').hidden=true;BACK=null}},{passive:true});
 syncV();nextSat();resetCp();
 SAVED=localStorage_has()?snap():null;
 function localStorage_has(){try{return !!localStorage.getItem('pizzaRechner')}catch(e){return false}}

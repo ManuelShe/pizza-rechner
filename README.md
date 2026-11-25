@@ -1,6 +1,6 @@
 # 🍕 Pizzaabend-Rechner
 
-**Version 1.4**
+**Version 1.5**
 
 Eine kleine Web-App für den Pizzaabend mit vielen Gästen: Personenzahl eingeben, und die App berechnet Teig, Beläge, Einkaufsliste und einen Zeitplan bis zur ersten Pizza aus dem Gas-Pizzaofen.
 
@@ -11,6 +11,7 @@ Eine kleine Web-App für den Pizzaabend mit vielen Gästen: Personenzahl eingebe
 
 ## Funktionen
 
+- **Navigationsleiste:** Bleibt oben stehen und führt direkt zu Einstellungen, Pizzen, Zeitplan, Einkauf, Rezept, Mise en place und Hinweisen; der aktuelle Bereich ist markiert.
 - **Teigrechner:** Neapolitanischer Pizzateig mit 63 % Wasser und 20 h kalter Gare. Die App berechnet die Mengen für die eingestellte Personenzahl (Erwachsene und Kinder) und den Hunger.
   - **Teiglinggewicht:** Wird automatisch passend zu Gästezahl und Ofengröße (12 oder 16 Zoll) gewählt oder lässt sich frei einstellen.
   - **Salz:** üblich (30 g pro kg Mehl) oder weniger (20 g pro kg).
@@ -91,6 +92,7 @@ Die Änderungen lassen sich auch in der App nachlesen: unten auf die Versionsnum
 
 | Version | Datum | Änderungen |
 |---|---|---|
+| 1.5 | 26.11.2026 | Navigationsleiste mit Markierung des aktuellen Bereichs · neue Reihenfolge der Bereiche · „Zurück zum Zeitplan“ entfällt · Datei-Menü nicht mehr abgeschnitten |
 | 1.4 | 25.11.2026 | Teilen per Link und QR-Code (auf Wunsch mit Häkchen) · Ausdruck zeigt abgehakte Einträge, Häkchen in der Datei mitgespeichert · automatisches Speichern · Symbole für Teilen, Drucken, Neu und Datei · Teigboxen: vorhandene zuerst voll belegen · anklickbare Versionsnummer mit Änderungsübersicht |
 | 1.3 | 22.11.2026 | „Zurück zum Zeitplan“ nach einem Sprung aus dem Zeitplan |
 | 1.2 | 22.11.2026 | Kneten von Hand mit eigener Knetzeit; erwartete Knetzeit bei Maschine |
