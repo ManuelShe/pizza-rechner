@@ -1,6 +1,6 @@
 # 🍕 Pizzaabend-Rechner
 
-**Version 1.3**
+**Version 1.4**
 
 Eine kleine Web-App für den Pizzaabend mit vielen Gästen: Personenzahl eingeben, und die App berechnet Teig, Beläge, Einkaufsliste und einen Zeitplan bis zur ersten Pizza aus dem Gas-Pizzaofen.
 
@@ -16,7 +16,7 @@ Eine kleine Web-App für den Pizzaabend mit vielen Gästen: Personenzahl eingebe
   - **Salz:** üblich (30 g pro kg Mehl) oder weniger (20 g pro kg).
   - **Hefe:** Trockenhefe oder Frischhefe.
   - **Kneten:** mit Maschine, aufgeteilt in mehrere Durchgänge, mit Anzeige der erwarteten Knetzeit, oder von Hand mit eigener Knetzeit pro Portion.
-- **Teigboxen:** Zeigt, wie die Teiglinge gleichmäßig auf die vorhandenen Boxen verteilt werden, und meldet fehlende Boxen.
+- **Teigboxen:** Zeigt, wie die Teiglinge gleichmäßig auf die Boxen verteilt werden. Reichen die Boxen nicht, werden die vorhandenen voll belegt und die fehlenden gemeldet.
 - **Pizzasorten:**
   - Die Sorten werden je nach Personenzahl automatisch ausgewählt, von Margherita bis Hawaii, mit Dessertpizza zum Schluss.
   - Die Anzahl pro Sorte lässt sich manuell festlegen; die übrigen Pizzen werden automatisch auf die anderen Sorten verteilt.
@@ -34,8 +34,9 @@ Eine kleine Web-App für den Pizzaabend mit vielen Gästen: Personenzahl eingebe
   - Links führen zu Einkaufsliste, Rezept und Mise en place.
 - **Rezept und Mise en place** als Checklisten zum Abhaken.
 - **Druckansicht** auf 4 Seiten: Überblick mit Zeitplan, Einkaufsliste, Teigrezept, Pizzen mit Mise en place.
-- **Speichern:** Einstellungen bleiben auf dem Gerät gespeichert. Mit „Neu“ gelten wieder die Standardwerte.
-- **Als Datei speichern / Datei öffnen** (Menü „Datei“): Einstellungen als `.json`-Datei sichern, auf ein anderes Gerät übertragen oder an andere weitergeben.
+- **Automatisches Speichern:** Jede Eingabe wird sofort auf dem Gerät gespeichert. Mit „Neu“ gelten wieder die Standardwerte.
+- **Als Datei speichern / Datei öffnen** (Menü „Datei“): Einstellungen samt Häkchen als `.json`-Datei sichern, auf ein anderes Gerät übertragen oder an andere weitergeben.
+- **Teilen:** Link oder QR-Code erzeugen. Wer ihn öffnet, bekommt dieselben Einstellungen samt Termin, auf Wunsch auch die Häkchen; sie ersetzen dort die gespeicherten Einstellungen. Die Daten stecken komprimiert im Link (hinter dem `#`) und werden an keinen Server geschickt.
 - **Offline nutzbar** und als App installierbar.
 
 ## Als App installieren
@@ -52,7 +53,7 @@ Nach dem ersten Öffnen mit Internet funktioniert die App auch ohne Netz.
 
 | Datei | Zweck |
 |---|---|
-| `index.html` | Die komplette App (HTML, CSS und JavaScript in einer Datei) |
+| `index.html` | Die komplette App (HTML, CSS und JavaScript in einer Datei, inkl. QR-Code-Bibliothek *qrcode-generator* von Kazuhiko Arase, MIT-Lizenz) |
 | `manifest.webmanifest` | App-Name, Farben und Icons für die Installation |
 | `sw.js` | Service Worker: speichert die App für die Offline-Nutzung |
 | `icon-192.png`, `icon-512.png`, `icon-180.png` | App-Icons (Android bzw. iOS) |
@@ -86,9 +87,12 @@ Die Belagsmengen sind Richtwerte für eine Pizza aus einem 280-g-Teigling und we
 
 ## Versionen
 
-| Version | Änderungen |
-|---|---|
-| 1.3 | Nach einem Sprung aus dem Zeitplan bleibt oben ein Button „Zurück zum Zeitplan“ stehen |
-| 1.2 | Kneten von Hand: eigene Knetzeit pro Portion einstellbar; bei Maschine Anzeige der erwarteten Knetzeit |
-| 1.1 | Button „Zum Zeitplan“ oben: springt direkt zum aktuellen Schritt |
-| 1.0 | Erste Version |
+Die Änderungen lassen sich auch in der App nachlesen: unten auf die Versionsnummer tippen.
+
+| Version | Datum | Änderungen |
+|---|---|---|
+| 1.4 | 25.11.2026 | Teilen per Link und QR-Code (auf Wunsch mit Häkchen) · Ausdruck zeigt abgehakte Einträge, Häkchen in der Datei mitgespeichert · automatisches Speichern · Symbole für Teilen, Drucken, Neu und Datei · Teigboxen: vorhandene zuerst voll belegen · anklickbare Versionsnummer mit Änderungsübersicht |
+| 1.3 | 22.11.2026 | „Zurück zum Zeitplan“ nach einem Sprung aus dem Zeitplan |
+| 1.2 | 22.11.2026 | Kneten von Hand mit eigener Knetzeit; erwartete Knetzeit bei Maschine |
+| 1.1 | 22.11.2026 | Button „Zum Zeitplan“ |
+| 1.0 | 22.11.2026 | Erste Version |
